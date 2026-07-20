@@ -38,6 +38,28 @@ export default function Classroom() {
       name: "francophone",
     },
   ];
+  const [form, setForm] = useState({
+    "level": "",
+    "speciality": "",
+    "lv2": "",
+    "repartition": "",
+    "section": "",
+  })
+  const levels = [
+    "Tle",
+    "P",
+    "2nde"
+  ]
+  const series = [
+    "C",
+    "D",
+    "A4"
+  ]
+  const lv2s = [
+    "All",
+    "Esp"
+  ]
+  const repartitions = ["A", "B"]
 
   return (
     <div className="classe-page">
@@ -167,25 +189,25 @@ export default function Classroom() {
             </>
           }
         >
-          {/* <>
+          <>
             <div className="form-row">
               <div className="form-group">
                 <label className="form-label">Niveau</label>
 
                 <select
                   className="form-control"
-                  value={classForm.levelId}
+                  value={form.level}
                   onChange={(e) =>
-                    setClassForm((prev) => ({
+                    setForm((prev) => ({
                       ...prev,
-                      levelId: e.target.value,
+                      level: e.target.value,
                     }))
                   }
                 >
                   <option value=""></option>
-                  {levels.map((level) => (
-                    <option key={level.id} value={level.id}>
-                      {level.name.toUpperCase()}
+                  {levels.map((level, i) => (
+                    <option key={i} value={level}>
+                      {level}
                     </option>
                   ))}
                 </select>
@@ -196,18 +218,18 @@ export default function Classroom() {
 
                 <select
                   className="form-control"
-                  value={classForm.specialityId}
+                  value={form.speciality}
                   onChange={(e) =>
-                    setClassForm((prev) => ({
+                    setForm((prev) => ({
                       ...prev,
-                      specialityId: e.target.value,
+                      speciality: e.target.value,
                     }))
                   }
                 >
                   <option value=""></option>
-                  {series.map((serie) => (
-                    <option key={serie.id} value={serie.id}>
-                      {serie.name}
+                  {series.map((serie,i) => (
+                    <option key={i} value={serie}>
+                      {serie}
                     </option>
                   ))}
                 </select>
@@ -220,18 +242,18 @@ export default function Classroom() {
 
                 <select
                   className="form-control"
-                  value={classForm.lv2_id}
+                  value={form.lv2}
                   onChange={(e) =>
-                    setClassForm((prev) => ({
+                    setForm((prev) => ({
                       ...prev,
-                      lv2_id: e.target.value,
+                      lv2: e.target.value,
                     }))
                   }
                 >
                   <option value=""></option>
-                  {lv2s.map((lv2) => (
-                    <option key={lv2.id} value={lv2.id}>
-                      {lv2.name}
+                  {lv2s.map((lv2, i) => (
+                    <option key={i} value={lv2}>
+                      {lv2}
                     </option>
                   ))}
                 </select>
@@ -242,17 +264,17 @@ export default function Classroom() {
 
                 <select
                   className="form-control"
-                  value={classForm.sectionId}
+                  value={form.section}
                   onChange={(e) =>
-                    setClassForm((prev) => ({
+                    setForm((prev) => ({
                       ...prev,
-                      sectionId: e.target.value,
+                      section: e.target.value,
                     }))
                   }
                 >
                   <option value=""></option>
                   {sections.map((section) => (
-                    <option key={section.id} value={section.id}>
+                    <option key={section.id} value={section.name}>
                       {section.name}
                     </option>
                   ))}
@@ -266,36 +288,24 @@ export default function Classroom() {
 
                 <select
                   className="form-control"
-                  value={classForm.repartitionId}
+                  value={form.repartition}
                   onChange={(e) =>
-                    setClassForm((prev) => ({
+                    setForm((prev) => ({
                       ...prev,
-                      repartitionId: e.target.value,
+                      repartition: e.target.value,
                     }))
                   }
                 >
                   <option value=""></option>
-                  {repartitions.map((r) => (
-                    <option key={r.id} value={r.id}>
-                      {r.name}
+                  {repartitions.map((r, i) => (
+                    <option key={i} value={r}>
+                      {r}
                     </option>
                   ))}
                 </select>
               </div>
             </div>
-
-            <div className="form-group">
-              <label className="form-label">Nom de la classe</label>
-              <input
-                className="form-control"
-                placeholder="Suivant le modele: Niveau [serie] [lv2] [repartition] "
-                value={classForm.name}
-                onChange={(e) =>
-                  setClassForm((f) => ({ ...f, name: e.target.value }))
-                }
-              />
-            </div>
-          </> */}
+          </>
         </Modal>
       </main>
     </div>
