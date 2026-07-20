@@ -1,15 +1,303 @@
+import { Edit, Layers, Plus, Trash } from "lucide-react";
+import { useState } from "react";
+import EmptyState from "../../../components/EmptyState";
 import Modal from "../../../components/Modal";
+import { classroomService } from "../service/ClassroomService";
+import "./Classroom.css"
 
-export default function Classroom()
-{
-    return (
-        <div className="classroom">
-            <p>Les classes ne sont pas encores disponibles</p>
-            <Modal
-                open={true}
-                title={"Ajouter une classe"}
-                footer={<button className="btn primary" >Ajouter</button>}
-            />
+export default function Classroom() {
+  const [classrooms, setClassrooms] = useState([
+    {
+        "id": crypto.randomUUID(),
+        "name": "Tle C",
+        "size": 60,
+        "section": "francophone",
+        "repartition": null,
+        "speciality": "C",
+        "lv2": null
+    },
+       {
+        "id": crypto.randomUUID(),
+        "name": "Form 1",
+        "size": 12,
+        "section": "anglophone",
+        "repartition": null,
+        "speciality": null,
+        "lv2": null
+    }
+  ]);
+  const [modal, setModal] = useState(false);
+  const [currentSection, setSection] = useState("tout");
+  const sections = [
+    {
+      id: "1",
+      name: "anglophone",
+    },
+    {
+      id: "2",
+      name: "francophone",
+    },
+  ];
+
+  return (
+    <div className="classe-page">
+      <header>
+        <div>
+          <h1 className="page-title">Gestion des classes</h1>
+          <div className="page-sub">
+            {classrooms.length} classes au total
+          </div>
         </div>
-    );
+
+        <button
+          className="btn primary"
+          onClick={() => {
+            setModal(true);
+          }}
+        >
+          <Plus size={15} />
+          <span>Ajouter une classe</span>
+        </button>
+      </header>
+
+      <main>
+        <section className="card">
+          <div className="card-body">
+            <div className="section-tabs">
+                <button className={`btn small${currentSection.toLowerCase() == "tout" ? " active" : ""}`}
+                  onClick={() => setSection("tout")}
+                >
+                    Tout
+                </button>
+              {sections.map((section) => (
+                <button
+                  className={`btn small${currentSection.toLowerCase() == section.name.toLowerCase() ? " active" : ""} ${section.name.toLowerCase() === "anglophone" ? " anglophone" : " fracophone"}`}
+                  key={section.id}
+                  onClick={() => setSection(section.name.toLowerCase())}
+                >
+                  <span>{section.name.toLowerCase()}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="table-wrap">
+            {classrooms.length === 0 ? (
+              <EmptyState
+                icon={Layers}
+                title="Aucune classe"
+                sub="Aucune classe pour ce cycle"
+              />
+            ) : (
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Classe</th>
+                    <th>Section</th>
+                    <th>Effectif</th>
+                    <th>Supprimer</th>
+                    <th>Modifier</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {classrooms.map((classroom) => (
+                    <tr key={classroom.id}>
+                      <td>
+                        <span style={{ fontWeight: 700, fontSize: 14 }}>
+                          {classroom.name}
+                        </span>
+                      </td>
+
+                      <td>
+                        <span>{classroom.section}</span>
+                      </td>
+
+                      <td>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          {classroom.size}
+                        </div>
+                      </td>
+
+                      <td> 
+                        <Trash
+                          size={15}
+                          color="red"
+                          style={{
+                            cursor: "pointer",
+                          }}
+                          onClick={() => classroomService.delete(classroom.id)}
+                        />
+                      </td>
+                      
+                      <td>
+                        <Edit
+                          size={15}
+                          color="blue"
+                          style={{
+                            cursor: "pointer",
+                          }}
+                          onClick={() => classroomService.update(classroom.id)}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </section>
+
+        <Modal
+          open={modal}
+          onClose={() => setModal(false)}
+          title="Ajouter une classe"
+          footer={
+            <>
+              <button className="btn secondary" onClick={() => setModal(false)}>
+                Annuler
+              </button>
+              <button className="btn primary" onClick={() => {
+                classroomService.create()
+                setModal(false)
+              }}>
+                <Plus size={15} />
+                Ajouter
+              </button>
+            </>
+          }
+        >
+          {/* <>
+            <div className="form-row">
+              <div className="form-group">
+                <label className="form-label">Niveau</label>
+
+                <select
+                  className="form-control"
+                  value={classForm.levelId}
+                  onChange={(e) =>
+                    setClassForm((prev) => ({
+                      ...prev,
+                      levelId: e.target.value,
+                    }))
+                  }
+                >
+                  <option value=""></option>
+                  {levels.map((level) => (
+                    <option key={level.id} value={level.id}>
+                      {level.name.toUpperCase()}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Serie</label>
+
+                <select
+                  className="form-control"
+                  value={classForm.specialityId}
+                  onChange={(e) =>
+                    setClassForm((prev) => ({
+                      ...prev,
+                      specialityId: e.target.value,
+                    }))
+                  }
+                >
+                  <option value=""></option>
+                  {series.map((serie) => (
+                    <option key={serie.id} value={serie.id}>
+                      {serie.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label className="form-label">LV2</label>
+
+                <select
+                  className="form-control"
+                  value={classForm.lv2_id}
+                  onChange={(e) =>
+                    setClassForm((prev) => ({
+                      ...prev,
+                      lv2_id: e.target.value,
+                    }))
+                  }
+                >
+                  <option value=""></option>
+                  {lv2s.map((lv2) => (
+                    <option key={lv2.id} value={lv2.id}>
+                      {lv2.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Section</label>
+
+                <select
+                  className="form-control"
+                  value={classForm.sectionId}
+                  onChange={(e) =>
+                    setClassForm((prev) => ({
+                      ...prev,
+                      sectionId: e.target.value,
+                    }))
+                  }
+                >
+                  <option value=""></option>
+                  {sections.map((section) => (
+                    <option key={section.id} value={section.id}>
+                      {section.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label className="form-label">Repartition</label>
+
+                <select
+                  className="form-control"
+                  value={classForm.repartitionId}
+                  onChange={(e) =>
+                    setClassForm((prev) => ({
+                      ...prev,
+                      repartitionId: e.target.value,
+                    }))
+                  }
+                >
+                  <option value=""></option>
+                  {repartitions.map((r) => (
+                    <option key={r.id} value={r.id}>
+                      {r.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Nom de la classe</label>
+              <input
+                className="form-control"
+                placeholder="Suivant le modele: Niveau [serie] [lv2] [repartition] "
+                value={classForm.name}
+                onChange={(e) =>
+                  setClassForm((f) => ({ ...f, name: e.target.value }))
+                }
+              />
+            </div>
+          </> */}
+        </Modal>
+      </main>
+    </div>
+  );
 }

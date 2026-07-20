@@ -11,7 +11,7 @@ export default function DashBoardLayout() {
     return (
         <div className="layout">
             <SideBar/>
-            <div >
+            <div className="content-wrapper">
                 <Navbar />
                 <main className="main-content">
                     <Outlet />

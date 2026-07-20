@@ -127,6 +127,7 @@ section {
   border-bottom: 1px solid var(--border);
   color: var(--text);
   vertical-align: middle;
+  font-size: 1rem;
 }
 
 .table tbody tr:last-child td {
@@ -142,6 +143,7 @@ section {
   align-items: center;
   gap: 6px;
 }
+
 
 
 

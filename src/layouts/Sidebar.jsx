@@ -11,7 +11,7 @@ export default function SideBar() {
     <div>
       <div className="sibebar-head">
         <div className="sidebar-title">
-          <span>MD Bilingual College</span>
+          <span className="college">MD Bilingual College</span>
         </div>
       </div>
 

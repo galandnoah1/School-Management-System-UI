@@ -3,11 +3,18 @@
     display: flex;
     min-height: 100vh;
     position: relative;
+   
 }
 
-.main-content
-{
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1; 
+    min-height: 100vh;
+}
+
+.main-content {
     flex: 1;
     padding: 30px;
-    overflow: hidden;
+    overflow-y: auto;
 }
