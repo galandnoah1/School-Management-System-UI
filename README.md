@@ -9,7 +9,7 @@ Interface web du système de gestion scolaire conçu pour **MD Bilingual College
 - **Vite** — bundler / serveur de développement
 - **CSS Vanilla** — mise en forme sans framework CSS externe
 
-## ✨ Fonctionnalités
+## Fonctionnalités
  
 - Gestion des élèves
 - Gestion des classes
