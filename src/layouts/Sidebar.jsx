@@ -1,17 +1,14 @@
 import {
   Book,
-  BookA,
   ClipboardList,
   CreditCard,
   FileText,
   GraduationCap,
   Layers,
   LayoutDashboardIcon,
-  LogOut,
   Megaphone,
   Settings,
   Shield,
-  Text,
   Users,
 } from "lucide-react";
 import { useState } from "react";
