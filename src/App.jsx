@@ -1,14 +1,19 @@
 import './App.css'
 import DashBoardLayout from './layouts/DashBoardLayout'
-import Navbar from './layouts/Navbar'
-import SideBar from './layouts/Sidebar'
+import { Route,Routes, Navigate } from 'react-router-dom'
 
 function App() {
   
 
   return (
     <>
-      <DashBoardLayout />
+      <Routes>
+        <Route element={<DashBoardLayout />}>
+          <Route index element={<Navigate to="/home" replace/>}/>
+          <Route path='/home'/>
+          <Route path='/classrooms' />
+        </Route>
+      </Routes>
     </>
   )
 }
