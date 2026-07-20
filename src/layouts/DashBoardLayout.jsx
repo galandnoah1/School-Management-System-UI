@@ -1,10 +1,11 @@
-import { useState } from "react";
+
 import SideBar from "./Sidebar";
 import './DashBoardLayout.css'
 import Navbar from "./Navbar";
+import { Outlet } from "react-router-dom";
 
 
-export default function DashBoardLayout({ children}) {
+export default function DashBoardLayout() {
     
 
     return (
@@ -13,7 +14,7 @@ export default function DashBoardLayout({ children}) {
             <div >
                 <Navbar />
                 <main className="main-content">
-                    {children}
+                    <Outlet />
                 </main>
             </div>
         </div>

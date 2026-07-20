@@ -1,5 +1,5 @@
 import { User2Icon } from "lucide-react";
-import { useEffect, useState } from "react";
+
 
 import "./Navbar.css";
 
