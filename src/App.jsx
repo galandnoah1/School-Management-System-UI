@@ -2,8 +2,8 @@
 import './App.css'
 import DashBoardLayout from './layouts/DashBoardLayout'
 import { Route,Routes, Navigate } from 'react-router-dom'
-import Home from './pages/Home'
-import Classroom from './pages/Classroom'
+import Home from './features/home/presentation/Home'
+import Classroom from './features/classroom/presentation/Classroom'
 import NotFound from './pages/NotFound'
 
 function App() {

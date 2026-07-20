@@ -1,6 +1,4 @@
 import { User2Icon } from "lucide-react";
-
-
 import "./Navbar.css";
 
 export default function Navbar() {
