@@ -1,0 +1,114 @@
+.section-tabs
+{
+   display: flex;
+   gap: 5px;
+   flex-wrap: wrap;
+   margin-bottom: 20px;
+}
+
+.section-tabs > button
+{
+    border-radius: var(--radius-large) !important;
+    background-color: #fff;
+    color: var(--text);
+    border: 1px solid var(--border);
+    display: inline-flex;
+    align-items: center;
+  
+}
+
+.section-tabs > button.active
+{
+     background-color: var(--green-600);
+    color: #fff;
+}
+
+.section-tabs > button.active.anglophone
+{
+    background: #2563eb;
+    border-color:#2563eb
+}
+
+/* StudentPage.css — à ajouter à la fin */
+
+@media print {
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  /* 1. On cache TOUT sur la page */
+  body * {
+    visibility: hidden;
+  }
+
+  /* 2. On ne réaffiche que la zone du bulletin et son contenu */
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+
+  /* 3. On sort le bulletin du flux normal pour qu'il occupe toute la page,
+        peu importe sa position d'origine (dans .subject-page, .main, etc.) */
+  .print-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  /* 4. Même à l'intérieur de .print-area, le bouton et le toolbar
+        restent explicitement masqués (ils ont "visibility: visible" hérité
+        du sélecteur générique juste au-dessus, donc on doit les re-cacher) */
+  .no-print,
+  .print-area .toolbar {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* 5. Le bulletin garde sa largeur A4 et ne coupe pas ses blocs internes */
+  .bulletin {
+    width: 210mm;
+    margin: 0 auto;
+  }
+
+  .header,
+  .top,
+  .title-block,
+  .student-info,
+  .discipline,
+  .notes-table,
+  .notes-table tr,
+  .footer-wrapper {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .header {
+    page-break-after: avoid;
+  }
+
+  .group-row,
+  .total-row {
+    page-break-inside: avoid;
+    page-break-after: avoid;
+  }
+
+  /* 6. Force l'impression des fonds gris (groupes, totaux, en-têtes) */
+  .group-row td,
+  .total-row td,
+  .notes-table thead th {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

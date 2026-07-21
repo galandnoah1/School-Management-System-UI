@@ -4,6 +4,7 @@ import EmptyState from "../../../components/EmptyState";
 import Modal from "../../../components/Modal";
 import { classroomService } from "../service/ClassroomService";
 import "./Classroom.css"
+import {lv2s, series, levels, repartitions } from "../../../constants/constants";
 
 export default function Classroom() {
   const [classrooms, setClassrooms] = useState([
@@ -45,21 +46,7 @@ export default function Classroom() {
     "repartition": "",
     "section": "",
   })
-  const levels = [
-    "Tle",
-    "P",
-    "2nde"
-  ]
-  const series = [
-    "C",
-    "D",
-    "A4"
-  ]
-  const lv2s = [
-    "All",
-    "Esp"
-  ]
-  const repartitions = ["A", "B"]
+
 
   return (
     <div className="classe-page">

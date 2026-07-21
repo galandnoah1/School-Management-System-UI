@@ -69,3 +69,30 @@
       path:"parameters"
     },
   ];
+
+  export const sections = [
+    {
+      id: "1",
+      name: "anglophone",
+    },
+    {
+      id: "2",
+      name: "francophone",
+    },
+  ];
+
+  export const levels = [
+    "Tle",
+    "P",
+    "2nde"
+  ]
+  export const series = [
+    "C",
+    "D",
+    "A4"
+  ]
+  export const lv2s = [
+    "All",
+    "Esp"
+  ]
+ export const repartitions = ["A", "B"]
